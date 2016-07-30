@@ -15,4 +15,4 @@ for ipCounter in range(0,1):
     # connect to dropbox
     dbx=Dropbox(dbxAccessKey)
     # upload scan file
-    dbx.files_upload("xmlMessage", "/NewScans/SCAN_"+ip+".xml", WriteMode.overwrite, True, None , True)
+    dbx.files_upload(xmlMessage, "/NewScans/SCAN_"+ip+".xml", WriteMode.overwrite, True, None , True)
