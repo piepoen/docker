@@ -1,24 +1,18 @@
 #!/usr/bin/python
-import subprocess
-# import xml.etree.ElementTree as ET
-import ipaddress
-# call NMAP with the right path
+from ipaddress import ip_address
+from os import environ
+from subprocess import check_output
+from dropbox import Dropbox
+from dropbox.files import WriteMode
 
-startIP=ipaddress.ip_address(u'80.73.48.15')
+startIP=ip_address(u'80.73.48.15')
 for ipCounter in range(0,1):
     ip = (startIP+ipCounter).__str__()
     print(ip)
-    xmlMessage = subprocess.check_output("/usr/bin/nmap -oX - -F -sV "+ip,shell=True)
-    # write the XML Message into a file
-    xmlFile = open("/shared_volume/SCAN_"+ip+".xml","w")
-    xmlFile.write(xmlMessage)
-    xmlFile.close()
-
-# parse the XML Message String into a element tree
-# treeRoot = ET.fromstring(xmlMessage)
-# print(treeRoot)
-# for child in treeRoot:
-#     print child.tag, child.attrib
-# for port in treeRoot.iter('port'):
-#     print port.tag, port.attrib
-
+    xmlMessage = check_output("nmap -oX - -F -sV "+ip,shell=True)
+    # read the dropbox access key from the environment variable DBX_KEY
+    dbxAccessKey = environ["DBX_KEY"]
+    # connect to dropbox
+    dbx=Dropbox(dbxAccessKey)
+    # upload scan file
+    dbx.files_upload("xmlMessage", "/NewScans/SCAN_"+ip+".xml", WriteMode.overwrite, True, None , True)
