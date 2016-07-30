@@ -10,7 +10,7 @@ for ipCounter in range(0,1):
     print(ip)
     xmlMessage = subprocess.check_output("/usr/bin/nmap -oX - -F -sV "+ip,shell=True)
     # write the XML Message into a file
-    xmlFile = open("SCAN_"+ip+".xml","w")
+    xmlFile = open("/shared_volume/SCAN_"+ip+".xml","w")
     xmlFile.write(xmlMessage)
     xmlFile.close()
 
