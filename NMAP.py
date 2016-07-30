@@ -8,7 +8,7 @@ startIP=ipaddress.ip_address(u'80.73.48.15')
 for ipCounter in range(0,1):
     ip = (startIP+ipCounter).__str__()
     print(ip)
-    xmlMessage = subprocess.check_output("nmap -oX - -F -sV "+ip,shell=True)
+    xmlMessage = subprocess.check_output("/user/bin/nmap -oX - -F -sV "+ip,shell=True)
     # write the XML Message into a file
     xmlFile = open("SCAN_"+ip+".xml","w")
     xmlFile.write(xmlMessage)
