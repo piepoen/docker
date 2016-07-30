@@ -6,7 +6,7 @@ from dropbox import Dropbox
 from dropbox.files import WriteMode
 
 startIP=ip_address(u'80.73.48.15')
-for ipCounter in range(0,1):
+for ipCounter in range(0,10):
     ip = (startIP+ipCounter).__str__()
     print(ip)
     xmlMessage = check_output("nmap -oX - -F -sV "+ip,shell=True)
